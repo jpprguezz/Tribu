@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card mb-4">
+        <div class="card-body">
+            <p class="card-text">{{ echo.content }}</p>
+            <p>By: <a href="{% url 'users:user_detail' echo.user.username %}">@{{ echo.user.username }}</a></p>
+            
+            {% if request.user == echo.user %}
+            <div class="mt-2">
+                <a href="{% url 'echos:edit_echo' echo.pk %}" class="btn btn-warning btn-sm">Edit echo</a>
+                <a href="{% url 'echos:delete_echo' echo.pk %}" class="btn btn-danger btn-sm">Delete echo</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <h4>All Waves</h4>
+    <a href="{% url 'echos:add_wave' echo.pk %}" class="btn btn-success btn-sm mb-3">Add wave</a>
+    
+    {% if waves %}
+        {% for wave in waves %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <p>{{ wave.content }}</p>
+                <p>By: <a href="{% url 'users:user_detail' wave.user.username %}">@{{ wave.user.username }}</a></p>
+                <small>{{ wave.created_at|timesince }} ago</small>
+                
+                {% if request.user == wave.user %}
+                <div class="mt-2">
+                    <a href="{% url 'waves:edit_wave' wave.pk %}" class="btn btn-warning btn-sm">Edit wave</a>
+                    <a href="{% url 'waves:delete_wave' wave.pk %}" class="btn btn-danger btn-sm">Delete wave</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No waves yet.</p>
+    {% endif %}
+
+    <a href="{% url 'echos:echo_detail' echo.pk %}" class="btn btn-secondary">Back to echo</a>
+</div>
+{% endblock %}
