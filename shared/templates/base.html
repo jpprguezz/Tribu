@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+  <main>
+    <div class='tribu_header'>{% block title %} <a href="{% url 'index' %}"><h1>Tribu</h1></a>{% endblock %}</div>
+  <div class="container">
+  <nav class="filters" style="margin-bottom:12px;">
+    <a href="{% url 'users:user_logged' %}">Perfil</a>
+    <a href="{% url 'echos:echo_list' %}">Echos</a> 
+  </nav>
+  </div>
+  {% block content %}
+
+  {% endblock %}
+
+      
+  </main>
+</body>
+</html>

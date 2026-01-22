@@ -1,0 +1,12 @@
+{% extends ".html" %}
+
+{% block content %}
+ <p> {{ user.profile.avatar }}</p>
+ <h2> Perfil de {{ user.username }} </h2>
+ <p> bio: {{ user.profile.bio }} </p>
+ <p> Nombre: {{ user.first_name }} </p>
+ <p> Apellido: {{ user.last_name }} </p>
+ <p> Nombre de usuario: {{ user.username }} </p>
+ <p> Correo electrónico: {{ user.email }} </p>
+
+{% endblock %}

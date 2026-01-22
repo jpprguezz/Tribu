@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Editando wave</h1>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Guardar">
+</form>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<ul class="waves">
+{% for wave in waves %}
+    <li><a href="{% url 'waves:wave-detail' %}">{{ wave }}</a></li>
+{% endfor %}
+</ul>
+
+<li><a href="{% url 'waves:wave-detail' %}">Cancel</a></li>
+{% endblock %}

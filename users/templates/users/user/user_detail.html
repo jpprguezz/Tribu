@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" class="img-fluid rounded-circle mb-3" alt="Avatar">
+                    {% endif %}
+                    <h2>Perfil de {{ user.username }}</h2>
+                    <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+                    <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+                    <p><strong>Usuario:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Bio:</strong> {{ user.profile.bio }}</p>
+                    
+                    {% if request.user == user %}
+                    <a href="{% url 'users:edit_profile' user.username %}" class="btn btn-warning btn-sm">Editar perfil</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <h3>Últimos Echos</h3>
+            {% if echos %}
+                {% for echo in echos %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <p>{{ echo.content|truncatewords:20 }}</p>
+                        <small>Publicado {{ echo.created_at|timesince }} ago</small>                        <a href="{% url 'echos:echo_detail' echo.pk %}" class="btn btn-sm btn-outline-primary">Ver detalle</a>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                {% if total_echos > 5 %}
+                <a href="{% url 'users:user_echos' user.username %}" class="btn btn-primary">Ver todos los echos</a>
+                {% endif %}
+            {% else %}
+                <p>No echos yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

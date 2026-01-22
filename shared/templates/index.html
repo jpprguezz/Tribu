@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 align='center'> Gritaselo al mundo! </h2>
+<p align='center'> Tribu es el lugar ideal para compartir tus ideas.</p>
+<p align='center'> Registrate y haz que tus pensamientos resuenen en todos lados. </p>
+
+ <div class="container">
+  <nav class="filters" style="margin-bottom:12px;">
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'signup' %}">SignUp</a>
+  </nav>
+
+<a href="{% url 'echos:echo_list' %}">Todos los echos</a>
+{% endblock %}
